@@ -13,7 +13,7 @@
 
             $greetings = "Welcome";
 
-            echo "<h1>". $greetings ."</h1>" . "1.1";
+            echo "<h1> $greetings </h1> 1.1"; # Pass variable + concatenation
         ?>
 
     </body>
