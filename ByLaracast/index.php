@@ -8,7 +8,13 @@
 
     <body>
 
-        <?php echo "<h1>Demo</h1>"; ?>
+        <?php
+            # Variables
+
+            $greetings = "Welcome";
+
+            echo "<h1>". $greetings ."</h1>" . "1.1";
+        ?>
 
     </body>
 
