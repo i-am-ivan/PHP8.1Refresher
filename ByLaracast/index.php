@@ -22,12 +22,52 @@
 
             ## Arrays
             $books = [
-                "Religious",
-                "Politics",
-                "Fantasy",
-                "Fiction",
-                "Songs"
-            ];
+                        [
+                            "Title" => "Hands-On Fullstack Web: Angular and Laravel 5",
+                            "Authors" => "Fernando Monteiro",
+                            "Publisher" => "Packt Publisher",
+                            "Published" => "Jul 2018"
+                        ],
+                        [
+                             "Title" => "JavaScript Cookbook",
+                             "Authors" =>
+                                [
+                                    "Adam D. Scott",
+                                    "Matthew MacDonald",
+                                    "Shelley Powers"
+                                ],
+                             "Publisher" => "O'Reilly Media",
+                             "Published" => "Jul 2021"
+
+                        ],
+                        [
+                             "Title" => "Modern PHP",
+                             "Authors" => "Josh Lockhart",
+                             "Publisher" => "O'Reilly Media",
+                             "Published" => "Feb 2015"
+                        ],
+                        [
+                             "Title" => "Core Java v1: Fundamentals 13th Edition",
+                             "Authors" => "Cay S. Horstmann",
+                             "Publisher" => "Addison-Wesley",
+                             "Published" => "Oct 2024"
+                        ]
+                    ];
+            # Functions
+            function filterByPublishers($books){ # Assign Variables to work with
+                # All books by a publisher
+                $filteredBooks = [];
+
+                # Get all books by specific publisher
+                foreach($books as $book){
+                    # Check authors
+                    if($book['Publisher'] == "O'Reilly Media"){
+                        $filteredBooks[] = $book;
+                    }
+                }
+
+                return $filteredBooks;
+            }
 
             # echo "<h1> $greetings!</h1> 1.1"; # Pass variable + concatenation
         ?>
@@ -49,9 +89,14 @@
         <h3> What of the following list:</h3>
 
         <ul>
-            <?php foreach($books as $book) : ?>
+            <?php
+                foreach(filterByPublishers($books) as $book) : # Array loop over
+                # Adding conditional
+            ?>
 
-                       <li> <?= $book; # Short 'echo' tags ?> </li>
+                       <li>
+                           <?= $book['Title'] . ", " . $book['Published']; # Short 'echo' tags ?>
+                       </li>
 
             <?php endforeach; ?>
         </ul>
