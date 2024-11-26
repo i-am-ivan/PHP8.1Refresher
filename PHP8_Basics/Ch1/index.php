@@ -1,90 +1,140 @@
 <?php
     # Error Reporting
+    // Enable all error reporting to help with debugging
     error_reporting(E_ALL);
+    // Display errors on the screen
     ini_set('display_errors', 1);
 
     # Variables
     ## String
+    // Set the title of the page
     $title = "Learning PHP Zero to Pro";
+    // Set the main content of the page
     $content = "Main content for this page here";
-    $footer = "&copy 2024. This is created by PHP";
+    // Set the footer text
+    define('FOOTER', "&copy 2024. This is created by PHP");
 
     ## Arrays
+    // Define a multidimensional array for the table of contents
     $tableOfContents = [
-                            "Chapters" => 
-                                [
-                                    "Titles" => "1 - Introduction to PHP",
-                                    "Subheadings" => [
-                                            "Incorporating PHP Within HTML",
-                                            "The Structure of PHP"
-                                        ]
-                                ],
-                                [
-                                    "Titles" => "2 - ",
-                                    "Subheadings" => [
-                                            ""
-                                        ]
-                                ]
-                       ];
+        "Chapters" => 
+            [
+                // First chapter
+                [
+                    "Titles" => "Data Types",
+                    "Subheadings" => [
+                        "Integers",
+                        "Fronting-Point Numbers",
+                        "Strings",
+                        "Booleans",
+                        "Arrays",
+                        "Objects",
+                        "Resources",
+                        "Callbacks",
+                        "NULL"
+                    ]
+                ],
+                // Second chapter
+                [
+                    "Titles" => "Variables",
+                    "Subheadings" => [
+                        "Variables Variables",
+                        "Variable References",
+                        "Variable Scope",
+                        "Garbage Collection"
+                    ]
+                ],
+                [
+                    "Titles" => "Expressions and Operators",
+                    "Subheadings" => [
+                        "Number of Operands",
+                    ]
+                ]
+            ]
+    ];
+
+    # Functions
+    function layeredHeadings($subheadings, $level = 1){
+        # To keep track of each chapter counter globally
+        static $counter = 1;
+
+        foreach($subheadings as $subheading){
+            if(is_array($subheading)){
+                # If subheading has subheadings, recursively call the function
+                layeredHeadings($subheading, $level + 1);
+            } else {
+                #
+                echo "<h" . ($level + 1) . ">" . $counter . ". " . $subheading . "</h" . ($level + 1) . ">";
+                $counter++;
+            }
+        }
+        return $counter;
+    }
+
 ?>
 
 <!DOCTYPE html>
 
-    <html lang="en">
+<html lang="en">
 
-        <head>
+    <head>
 
-            <title>
-                <?= $title; ?>
-            </title>
+        <title>
+            <?= $title; ?>
+        </title>
 
-            <link rel="stylesheet" href="../assets/css/style.css">
+        <!-- Link to external stylesheet -->
+        <link rel="stylesheet" href="../assets/css/style.css">
 
-            <meta charset="UTF-8">
+        <!-- Set character encoding -->
+        <meta charset="UTF-8">
 
-            <meta name="description" content="Basic HTML Page">
+        <!-- Set page description -->
+        <meta name="description" content="Basic HTML Page">
 
-        </head>
+    </head>
 
-        <body>
+    <body>
 
-            <header>
-                
-                <?php 
-                    foreach ($tableOfContents as $toc=> $title):
+        <header>
+            
+            <?php 
+                // Loop through the table of contents array
+                foreach ($tableOfContents["Chapters"] as $chapter):
+            ?>
+
+            <h1>
+                <?= "Chapter " . $chapter["Titles"]; ?>
+            </h1>
+
+            <!-- Iterate each Chapter to iterate subheadings corresponding to the Chapter title Above -->
+            <?php 
+                # Call the function to iterate through the ToC array
+                layeredHeadings($chapter["Subheadings"]);
+            ?>
+
+            <?php endforeach; ?>
+
+        </header>
+
+        <section class="">
+
+            <p>
+                <?= $content; ?>
+
+                <?php
+                    define('PUBLISHER', "O'Reilly Media");
+                    echo PUBLISHER;
                 ?>
+            </p>
 
-                <h1>
-                    <?= "Chapter " . $title["Titles"]; ?>
-                </h1>
+        </section>
 
-                <h2> 
-                    <?php # Iterate each Chapter to iterate subheadings corresponding to the Chapter title Above                 
-                    ?> 
-                </h2>
+        <footer>
+            <p>
+                <?= FOOTER; ?>
+            </p>
+        </footer>
 
-                <h4>
-                    <?php # Print the contents of each subheading under the subheading above
-                    ?>
-                </h4>
-
-                <?php endforeach; ?>
-
-            </header>
-
-            <section class="">
-
-                <p>
-                    <?= $content; ?>
-                </p>
-
-            </section>
-
-            <footer>
-                <p>
-                    <?= $footer; ?>
-                </p>
-            </footer>
-
-        </body>
-    </html>
+    </body>
+</html>

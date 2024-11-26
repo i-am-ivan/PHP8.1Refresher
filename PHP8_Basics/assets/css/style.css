@@ -5,3 +5,13 @@ body {
      height: 100vh;
      margin:0;
  }
+
+ h1 {
+    color: blue;
+    margin-bottom: 5%;
+    font-size: 30px;
+ }
+
+ h2 {
+    font-size: 22px;
+ }
