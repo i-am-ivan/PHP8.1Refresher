@@ -12,7 +12,9 @@
     // Set the main content of the page
     $content = "Main content for this page here";
     // Set the footer text
-    define('FOOTER', "&copy 2024. This is created by PHP");
+    define('FOOTER', "&copy " . date("Y") . ". This is created by PHP");
+    //
+    $x = 6491;
 
     ## Arrays
     // Define a multidimensional array for the table of contents
@@ -99,12 +101,20 @@
         <header>
             
             <?php 
+                #
+                $headingLevel = 0;
+                while ($headingLevel < COUNT($tableOfContents)) {
+                    $headingLevel++;
+                }
+
                 // Loop through the table of contents array
-                foreach ($tableOfContents["Chapters"] as $chapter):
+                foreach ($tableOfContents["Chapters"] as $chapter):  
+                    
+                    
             ?>
 
             <h1>
-                <?= "Chapter " . $chapter["Titles"]; ?>
+                <?= "Chapter {$headingLevel} - " . $chapter["Titles"]; ?>
             </h1>
 
             <!-- Iterate each Chapter to iterate subheadings corresponding to the Chapter title Above -->
@@ -119,12 +129,12 @@
 
         <section class="">
 
-            <p>
-                <?= $content; ?>
+            <h1> Data Types </h1>
 
+            <p>
                 <?php
-                    define('PUBLISHER', "O'Reilly Media");
-                    echo PUBLISHER;
+
+                    echo is_int($x) ? "Yes, \$x($x) is an typeof($x).\n" : "No, \$x($x) is an typeof($x).\n";
                 ?>
             </p>
 

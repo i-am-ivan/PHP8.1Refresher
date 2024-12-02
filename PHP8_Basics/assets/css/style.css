@@ -15,3 +15,8 @@ body {
  h2 {
     font-size: 22px;
  }
+
+ p {
+    font-size: 14px;
+    margin-bottom: 5%;
+ }
